@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+</head>
+<style>
+    body{
+        background-color: chocolate;
+    }
+    .box{
+        display: grid,flex;
+        grid-template-rows: repeat(3,5vw);
+        grid-template-columns: repeat(3,5vw);
+        cursor: pointer;
+        border:5px solid aqua;
+        font-size: 8vw;
+        text-align: center;
+    }
+    .container{
+        display: grid;
+        justify-content: center;
+        text-align: center;
+        grid-template-rows: repeat(3,10vw);
+        grid-template-columns: repeat(3,10vw);
+    }
+    .bt{
+    border-top: 0;
+}
+.bl{
+    border-left: 0;
+}
+.br{
+    border-right: 0;
+}
+.bb{
+    border-bottom: 0;
+}
+h1{
+    text-align: center;
+}
+.box:hover{
+    background-color: burlywood;
+}
+.text{
+    margin: 20px;
+    text-align: center;
+    font-size: 20px;
+    background-color: rgb(166, 244, 244);
+    padding-top: 15px;
+    height: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+    border:3px solid blue;
+    border-radius:10px ;
+}
+.winner{
+    background-color: burlywood;
+    color: green;
+    margin-left: 1050px;
+    font-size: 40px;
+    padding-top: 4px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    border:4px solid brown;
+    border-radius: 7px;
+}
+.but{
+    height:30px;
+    width: 80px;
+    border: none;
+    background-color: rgb(122, 122, 188);
+    font-weight: 700;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    border-radius: 5px;
+    margin-left:150px;
+}
+.pic img{
+    width:0 px;
+    transition:width 1s ease-in-out;
+    
+}
+</style>
+<body>
+    <h1>Tic-Tac-Toe</h1>
+    <span class="winner"></span>
+    <div class="container">
+        <button class="box bt bl" id="1"  onclick="chance(1)"></button>
+        <button class="box bt" id="2" onclick="chance(2)"></button>
+        <button class="box br bt"id="3" onclick="chance(3)"> <span class="pic">
+        </span></button>
+        <button class="box bl"id="4" onclick="chance(4)"></button>
+        <button class="box"id="5" onclick="chance(5)"></button>
+        <button class="box br"id="6" onclick="chance(6)"></button>
+        <button class="box bb bl"id="7" onclick="chance(7)"></button>
+        <button class="box bb"id="8" onclick="chance(8)"></button>
+        <button class="box br bb"id="9" onclick=" chance(9)"></button>
+    </div>
+<div class="text"></div>
+<script>
+let turn="X"
+let ting=new Audio("interface-124464.mp3")
+let won=new Audio("mixkit-ethereal-fairy-win-sound-2019.wav")
+let photo=
+document.querySelector('.text').innerHTML=`Turn Of ${turn}<button class='but'  onclick="reset()">RESET</button>`
+function chance(a){
+   document.getElementById(a).innerHTML=`${turn}`
+   ting.play()
+   win()
+   changeTurn()
+   document.querySelector('.text').innerHTML=`Turn Of ${turn}<button class='but' onclick="reset()">RESET</button>`
+}
+function changeTurn(){
+    if(turn==="X"){
+      turn='O'
+    }
+    else{
+     turn='X'
+    }
+}
+function reset(){
+    for(let i=1;i<10;i++){
+    document.getElementById(i).innerHTML=``
+    }
+    document.querySelector('.winner').innerHTML=``
+    document.querySelector('.pic').innerHTML=``
+}
+function win(){
+    if( (document.getElementById(1).innerHTML==='X')&&(document.getElementById(2).innerHTML==='X')&&(document.getElementById(3).innerHTML==='X') ||
+    (document.getElementById(1).innerHTML==='X')&&(document.getElementById(4).innerHTML==='X')&&(document.getElementById(7).innerHTML==='X')||
+    (document.getElementById(3).innerHTML==='X')&&(document.getElementById(6).innerHTML==='X')&&(document.getElementById(9).innerHTML==='X')||
+    (document.getElementById(7).innerHTML==='X')&&(document.getElementById(8).innerHTML==='X')&&(document.getElementById(9).innerHTML==='X')||
+    (document.getElementById(2).innerHTML==='X')&&(document.getElementById(5).innerHTML==='X')&&(document.getElementById(8).innerHTML==='X')||
+    (document.getElementById(4).innerHTML==='X')&&(document.getElementById(5).innerHTML==='X')&&(document.getElementById(6).innerHTML==='X')||
+    (document.getElementById(1).innerHTML==='X')&&(document.getElementById(5).innerHTML==='X')&&(document.getElementById(9).innerHTML==='X')||
+    (document.getElementById(3).innerHTML==='X')&&(document.getElementById(5).innerHTML==='X')&&(document.getElementById(7).innerHTML==='X')){
+        document.querySelector('.winner').innerHTML=`HURRAY X WON!!`
+        won.play()
+       
+    }
+    else if((document.getElementById(1).innerHTML==='O')&&(document.getElementById(2).innerHTML==='O')&&(document.getElementById(3).innerHTML==='O') ||
+    (document.getElementById(1).innerHTML==='O')&&(document.getElementById(4).innerHTML==='O')&&(document.getElementById(7).innerHTML==='O')||
+    (document.getElementById(3).innerHTML==='O')&&(document.getElementById(6).innerHTML==='O')&&(document.getElementById(9).innerHTML==='O')||
+    (document.getElementById(7).innerHTML==='O')&&(document.getElementById(8).innerHTML==='O')&&(document.getElementById(9).innerHTML==='O')||
+    (document.getElementById(2).innerHTML==='O')&&(document.getElementById(5).innerHTML==='O')&&(document.getElementById(8).innerHTML==='O')||
+    (document.getElementById(4).innerHTML==='O')&&(document.getElementById(5).innerHTML==='O')&&(document.getElementById(6).innerHTML==='O')||
+    (document.getElementById(1).innerHTML==='O')&&(document.getElementById(5).innerHTML==='O')&&(document.getElementById(9).innerHTML==='O')||
+    (document.getElementById(3).innerHTML==='O')&&(document.getElementById(5).innerHTML==='O')&&(document.getElementById(7).innerHTML==='O')){
+        document.querySelector('.winner').innerHTML=`HURRAY O WON!!`
+        won.play()
+        
+    }
+   
+}
+</script>
+</body>
+</html>
